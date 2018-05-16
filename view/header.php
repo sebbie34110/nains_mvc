@@ -1,6 +1,3 @@
-<?php require('ini.php') ?>
-<?php require('common.php') ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css\bootstrap.min.css">
-    <link rel="stylesheet" href="css\bootstrap-grid.min.css">
+    <link rel="stylesheet" href="assets\css\bootstrap.min.css">
+    <link rel="stylesheet" href="assets\css\bootstrap-grid.min.css">
 
     <title>Les Nains</title>
   </head>

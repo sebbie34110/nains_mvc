@@ -50,6 +50,25 @@ class GroupeManager extends CoreManager
 
     }
 
+    /**
+     * Retour les infos sur le groupe
+     * @param  int   $g_id [id du groupe]
+     * @return array       [description]
+     */
+    public function getGroupInfo(int $id) : ? array
+    {
+        $sql = 'SELECT `groupe`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
+        FROM `groupe`
+        LEFT JOIN `nain` ON `g_id` = `n_groupe_fk`
+        LEFT JOIN `taverne` ON `g_taverne_fk` = `taverne`.`t_id`
+        LEFT JOIN `tunnel` ON `g_tunnel_fk` = `tunnel`.`t_id`
+        LEFT JOIN `ville` AS villedepart ON `t_villedepart_fk` = `v_id`
+        WHERE `g_id`= :id';
+
+        return DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+    }
+
+
 }
 
 

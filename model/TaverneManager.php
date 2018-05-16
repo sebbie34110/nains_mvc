@@ -23,6 +23,36 @@ class TaverneManager extends CoreManager
         return DBManager::getInstance()->makeSelect($sql, [':v_id' => $v_id]);
     }
 
+    /**
+    * Récupération des infos sur la taverne
+    * @param  int   $t_id [description]
+    * @return array       [description]
+    */
+    public function getTaverneInfo( int $t_id) : ? array
+    {
+
+      $sql = 'SELECT `ville`.*, `n_nom` FROM `ville` INNER JOIN `nain` ON `v_id` = `n_ville_fk` WHERE `v_id` = :v_id';
+
+      return DBManager::getInstance()->makeSelect($sql, [':v_id' => $v_id]);
+
+    }
+
+    /**
+     * infos sur la taverne pour la page Taverne.php
+     * @param  int   $t_id [description]
+     * @return array       [description]
+     */
+    public function tavernePageInfo(int $id) : array {
+      $sql = 'SELECT `taverne`.*, `v_nom`, (`t_chambres` - COUNT(`n_id`)) AS `chambresLibres`
+              FROM `taverne`
+              LEFT JOIN ville ON t_ville_fk = v_id
+              LEFT JOIN `groupe` ON `t_id`=`g_taverne_fk`
+              LEFT JOIN `nain` ON `g_id`=`n_groupe_fk`
+              WHERE t_id = :id
+              GROUP BY `t_id`';
+
+      return DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+    }
 
 
 

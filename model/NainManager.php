@@ -47,5 +47,20 @@ class NainManager extends CoreManager
 
     }
 
+    /**
+    * Changer le nain de groupe
+    * @param int $id     [description]
+    * @param int $groupe [description]
+    */
+    public function changeGroupe( int $id, int $groupe) : void
+    {
+
+      $sql = 'UPDATE `nain` SET `n_groupe_fk`= :idGroupe WHERE `n_id` = :idNain';
+
+      $q = DBManager::getInstance()->prepare($sql);
+      $q->execute();
+    }
+
+
 
 }
