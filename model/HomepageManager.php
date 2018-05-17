@@ -8,7 +8,7 @@
 
 namespace nains\model;
 
-class CoreManager
+class HomepageManager
 {
 
 

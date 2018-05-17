@@ -9,7 +9,7 @@
 namespace nains\model;
 
 
-class TunnelManager extends CoreManager
+class TunnelManager extends HomepageManager
 {
 
 

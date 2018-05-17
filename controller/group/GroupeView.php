@@ -4,9 +4,6 @@
 
 ?>
 
-<!-- <body> (dans header.php) -->
-
-
 <div class="container">
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
@@ -54,6 +51,3 @@
   </div>
 </div>
 
-
-<!-- </body> (dans footer.php)-->
-<?php require('inc/footer.php') ?>

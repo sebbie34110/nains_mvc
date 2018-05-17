@@ -10,14 +10,14 @@ $msgClass='';
       <h1 class="mb-3">Nain</h1>
       <p class="rounded text-light text-center bg <?php if ($msgClass!=='') { echo $msgClass; }?> pt-1 pb-1"><?php if ($msg!=='') { echo $msg; }?></p>
 
-      <p>nom : <?= $info[0]['n_nom'] ?>.</p>
+      <p>nom : <?= $nain->getNom() ?>.</p>
 
-      <p>Longueur de barbe : <?= $info[0]['n_barbe'] ?> cm.</p>
+      <p>Longueur de barbe : <?= $nain->getBarbe() ?> cm.</p>
 
       <p>Originaire de :  <a href="ville.php?v_id=<?=$info[0]['v_id']?>"> <?=$info[0]['v_nom']?> </a>.</p>
 
       <?php if ($info[0]['g_id'] !== null): ?>
-        <p>Boit dans : <a href="../taverne/viewTaverne.php?t_id=<?= $info[0]['t_id']?>"><?= $info[0]['t_nom']?></a>.</p>
+        <p>Boit dans : <a href="../../taverne/TaverneView.php?t_id=<?= $info[0]['t_id']?>"><?= $info[0]['t_nom']?></a>.</p>
 
         <p>Travaille de <?=$info[0]['g_debuttravail']?> à <?= $info[0]['g_fintravail'] ?> dans le tunnel de <?=$depart?> à <?=$arrivee?>.</p>
 

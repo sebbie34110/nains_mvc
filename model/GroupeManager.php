@@ -8,7 +8,7 @@
 
 namespace nains\model;
 
-class GroupeManager extends CoreManager
+class GroupeManager extends HomepageManager
 {
 
 
@@ -18,7 +18,7 @@ class GroupeManager extends CoreManager
     public function getListeGroupes() : ? array
     {
 
-        $sql = 'SELECT `g_id` FROM `groupe` ORDER BY `g_id` ASC';
+        $sql = 'SELECT `g_id` FROM `group` ORDER BY `g_id` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
@@ -31,7 +31,7 @@ class GroupeManager extends CoreManager
     public function getHorairesDebut() : ? array
     {
 
-        $sql = 'SELECT `g_debuttravail` AS debut FROM `groupe` GROUP BY `g_debuttravail` ORDER BY `g_debuttravail` ASC';
+        $sql = 'SELECT `g_debuttravail` AS debut FROM `group` GROUP BY `g_debuttravail` ORDER BY `g_debuttravail` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
@@ -44,21 +44,21 @@ class GroupeManager extends CoreManager
     public function getHorairesFin() : ? array
     {
 
-        $sql = 'SELECT `g_fintravail` AS fin FROM `groupe` GROUP BY `g_fintravail` ORDER BY `g_fintravail` ASC';
+        $sql = 'SELECT `g_fintravail` AS fin FROM `group` GROUP BY `g_fintravail` ORDER BY `g_fintravail` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
     }
 
     /**
-     * Retour les infos sur le groupe
-     * @param  int   $g_id [id du groupe]
+     * Retour les infos sur le group
+     * @param  int   $g_id [id du group]
      * @return array       [description]
      */
     public function getGroupInfo(int $id) : ? array
     {
-        $sql = 'SELECT `groupe`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
-        FROM `groupe`
+        $sql = 'SELECT `group`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
+        FROM `group`
         LEFT JOIN `nain` ON `g_id` = `n_groupe_fk`
         LEFT JOIN `taverne` ON `g_taverne_fk` = `taverne`.`t_id`
         LEFT JOIN `tunnel` ON `g_tunnel_fk` = `tunnel`.`t_id`

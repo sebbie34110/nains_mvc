@@ -40,7 +40,7 @@ declare(strict_types=1);
 
 
   /*/**
-   * Récupération des infos sur la ville de depart/arrivee du nain (page viewNain.php)
+   * Récupération des infos sur la ville de depart/arrivee du nain (page Nain.php)
    * @param  int   $v_id [description]
    * @return array       [description]
    */
@@ -50,13 +50,13 @@ declare(strict_types=1);
       $sql = "SELECT v_nom AS departArrivee, v_id AS id
               FROM ville
               INNER JOIN tunnel ON v_id = t_villedepart_fk
-              INNER JOIN groupe ON t_id = g_tunnel_fk
+              INNER JOIN group ON t_id = g_tunnel_fk
               WHERE g_id = $id
               UNION
               SELECT v_nom AS departArrivee, v_id AS id
               FROM ville
               INNER JOIN tunnel ON v_id = t_villearrivee_fk
-              INNER JOIN groupe ON t_id = g_tunnel_fk
+              INNER JOIN group ON t_id = g_tunnel_fk
               WHERE g_id = $id";
 
       if ($db=connectDB()) {
@@ -132,8 +132,8 @@ declare(strict_types=1);
 // }
 
 /**
- * Retour les infos sur le groupe
- * @param  int   $g_id [id du groupe]
+ * Retour les infos sur le group
+ * @param  int   $g_id [id du group]
  * @return array       [description]
  */
 // function getGroupeInfo(int $g_id) : array {
@@ -141,8 +141,8 @@ declare(strict_types=1);
 //
 //   if ($dataBase = connectDB()) {
 //
-//     $sql = 'SELECT `groupe`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
-//     FROM `groupe`
+//     $sql = 'SELECT `group`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
+//     FROM `group`
 //     LEFT JOIN `nain` ON `g_id` = `n_groupe_fk`
 //     LEFT JOIN `taverne` ON `g_taverne_fk` = `taverne`.`t_id`
 //     LEFT JOIN `tunnel` ON `g_tunnel_fk` = `tunnel`.`t_id`
@@ -190,18 +190,18 @@ declare(strict_types=1);
 
 
 // /**
-// * Changer le nain de groupe
+// * Changer le nain de group
 // * @param int $id     [description]
-// * @param int $groupe [description]
+// * @param int $group [description]
 // */
-// function changeGroupeNain( int $id, int $groupe) : void {
+// function changeGroupeNain( int $id, int $group) : void {
 //   connectDB();
 //
 //   $sql = 'UPDATE `nain` SET `n_groupe_fk`= :idGroupe WHERE `n_id` = :idNain';
 //
 //   if ($db=connectDB()) {
 //     $req = $db->prepare($sql);
-//     $req->bindValue(':idGroupe', $groupe, PDO::PARAM_INT);
+//     $req->bindValue(':idGroupe', $group, PDO::PARAM_INT);
 //     $req->bindValue(':idNain', $id, PDO::PARAM_INT);
 //     $req->execute();
 //   }
@@ -215,7 +215,7 @@ declare(strict_types=1);
 //  */
 // function tavernePageInfo(int $t_id) : array {
 //   connectDB();
-//   $sql='SELECT `taverne`.*, `v_nom`, (`t_chambres` - COUNT(`n_id`)) AS `chambresLibres` FROM `taverne` LEFT JOIN ville ON t_ville_fk = v_id LEFT JOIN `groupe` ON `t_id`=`g_taverne_fk` LEFT JOIN `nain` ON `g_id`=`n_groupe_fk` WHERE t_id = :t_id GROUP BY `t_id`';
+//   $sql='SELECT `taverne`.*, `v_nom`, (`t_chambres` - COUNT(`n_id`)) AS `chambresLibres` FROM `taverne` LEFT JOIN ville ON t_ville_fk = v_id LEFT JOIN `group` ON `t_id`=`g_taverne_fk` LEFT JOIN `nain` ON `g_id`=`n_groupe_fk` WHERE t_id = :t_id GROUP BY `t_id`';
 //
 //   if ($db=connectDB()) {
 //       $req = $db->prepare($sql);

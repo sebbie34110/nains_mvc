@@ -8,7 +8,7 @@
 
 namespace nains\controller\groupe;
 
-class ControllerGroupe
+class GroupController
 {
 
     if (isset($_GET['g_id'])) {
@@ -16,13 +16,13 @@ class ControllerGroupe
 
     $infoGroupe = getGroupeInfo($g_id);
 
-    // Liste des nains du groupe
+    // Liste des nains du group
     $nainsGroupe = '';
     foreach ($infoGroupe as $key) {
     $nainsGroupe .= '<li>' . $key['n_nom'] . '</li>';
     }
 
-    $taverne = "<a href='viewTaverne.php?t_id=".$infoGroupe[0]['t_id']."'>".$infoGroupe[0]['nomTaverne']."</a>";
+    $taverne = "<a href='TaverneView.php?t_id=".$infoGroupe[0]['t_id']."'>".$infoGroupe[0]['nomTaverne']."</a>";
 
     // Recupération des villes de départ/arrivée
     $v_depart = (int)$infoGroupe[0]['t_villedepart_fk'];

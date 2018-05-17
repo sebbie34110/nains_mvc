@@ -8,7 +8,7 @@
 
 namespace nains\model;
 
-class TaverneManager extends CoreManager
+class TaverneManager extends HomepageManager
 {
 
     /**
@@ -46,7 +46,7 @@ class TaverneManager extends CoreManager
       $sql = 'SELECT `taverne`.*, `v_nom`, (`t_chambres` - COUNT(`n_id`)) AS `chambresLibres`
               FROM `taverne`
               LEFT JOIN ville ON t_ville_fk = v_id
-              LEFT JOIN `groupe` ON `t_id`=`g_taverne_fk`
+              LEFT JOIN `group` ON `t_id`=`g_taverne_fk`
               LEFT JOIN `nain` ON `g_id`=`n_groupe_fk`
               WHERE t_id = :id
               GROUP BY `t_id`';

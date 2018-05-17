@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `groupe`
+-- Structure de la table `group`
 --
 
 DROP TABLE IF EXISTS `groupe`;
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `groupe`
+-- Déchargement des données de la table `group`
 --
 
 INSERT INTO `groupe` (`g_id`, `g_debuttravail`, `g_fintravail`, `g_taverne_fk`, `g_tunnel_fk`) VALUES
@@ -186,7 +186,7 @@ INSERT INTO `ville` (`v_id`, `v_nom`, `v_superficie`) VALUES
 --
 
 --
--- Contraintes pour la table `groupe`
+-- Contraintes pour la table `group`
 --
 ALTER TABLE `groupe`
   ADD CONSTRAINT `groupe_ibfk_1` FOREIGN KEY (`g_taverne_fk`) REFERENCES `taverne` (`t_id`) ON DELETE CASCADE ON UPDATE CASCADE,

@@ -10,6 +10,8 @@ namespace nains\model\entities;
 
 
 
+use nains\model\VilleManager;
+
 class Nain
 {
 
@@ -26,14 +28,19 @@ class Nain
 
     // Hydratation
     public function hydrate(array $data){
-        foreach ($data as $key => $val){
-            $method = 'set' . ucfirst($key);
 
-            if (method_exists($this, $method)){
-                $this->$method($val);
+        foreach ($data as $nain){
+            foreach ($nain as $key => $val){
+                $method = 'set' . ucfirst($key);
+
+                if (method_exists($this, $method)){
+                    $this->$method($val);
+                }
             }
         }
     }
+
+
 
     /**
      * @param mixed $id
@@ -72,7 +79,12 @@ class Nain
      */
     public function setVille($ville)
     {
-        $this->ville = $ville;
+        // faire un new VilleManager, aller cherche les info de la ville dans la db
+        // et hydrater entitees Ville et la stoker dans $ville
+
+        $manager = new VilleManager();
+        $data = $manager->getVilleInfo($ville);
+        $this->ville = $data;
     }
 
     /**

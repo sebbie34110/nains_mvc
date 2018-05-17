@@ -27,7 +27,7 @@ if ($_GET) {
     $listeTavernes = '';
     foreach ($taverneInfo as $key) {
         //$listeTavernes .= "<li>".$key['t_nom']."</li>";
-        $listeTavernes .= '<li><a href="viewTaverne.php?t_id='.$key['t_id'].'">'.$key['t_nom'].'</a></li>';
+        $listeTavernes .= '<li><a href="TaverneView.php?t_id='.$key['t_id'].'">'.$key['t_nom'].'</a></li>';
     }
 
     // Progres des tunnels de la ville
