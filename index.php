@@ -29,7 +29,7 @@ if(isset($_GET['v_submit']) && !empty($_GET['v_submit'])) {
 // Groupes
 if(isset($_GET['g_submit']) && !empty($_GET['g_submit'])) {
     $controller = 'Group';
-    $params = (int)$_GET['n_id'];
+    $params = (int)$_GET['g_id'];
 }
 
 // Tavernes

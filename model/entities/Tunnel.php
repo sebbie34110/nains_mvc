@@ -11,7 +11,7 @@ class Tunnel
 {
 
     protected $id;
-    protected progres;
+    protected $progres;
     protected $villedepart;
     protected $villearrivee;
 

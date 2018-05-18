@@ -27,15 +27,13 @@ class Nain
     }
 
     // Hydratation
-    public function hydrate(array $data){
+    public function hydrate(array $data) : void {
 
-        foreach ($data as $nain){
-            foreach ($nain as $key => $val){
-                $method = 'set' . ucfirst($key);
+        foreach ($data as $key => $val) {
+            $method = 'set' . ucfirst($key);
 
-                if (method_exists($this, $method)){
-                    $this->$method($val);
-                }
+            if (method_exists($this, $method)) {
+                $this->$method($val);
             }
         }
     }
@@ -79,12 +77,7 @@ class Nain
      */
     public function setVille($ville)
     {
-        // faire un new VilleManager, aller cherche les info de la ville dans la db
-        // et hydrater entitees Ville et la stoker dans $ville
-
-        $manager = new VilleManager();
-        $data = $manager->getVilleInfo($ville);
-        $this->ville = $data;
+        $this->ville = $ville;
     }
 
     /**

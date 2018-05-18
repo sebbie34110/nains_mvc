@@ -39,7 +39,7 @@ class VilleManager extends HomepageManager
      * @param int $v_id
      * @return array
      */
-    public function getVilleInfo($ville) : object {
+    public function getVilleInfo($ville) : Ville {
 
         if (is_int($ville)){
 
@@ -54,6 +54,38 @@ class VilleManager extends HomepageManager
         }
 
         return new Ville($data);
+
+    }
+
+
+    /**
+     * @param int $v_id
+     * @return array
+     */
+    public function getVilleById(int $id) : Ville {
+
+            $sql = 'SELECT `v_id` as `id`, `v_nom` as `nom`, `v_superficie` AS `superficie` FROM `ville` WHERE `v_id` = :id';
+
+            $data = DBManager::getInstance()->makeSelect($sql, ['id', $id]);
+
+
+        return new Ville($data[0]);
+
+    }
+
+
+    /**
+     * @param string $ville
+     * @return Ville
+     */
+    public function getVilleByName(string $ville) : Ville {
+
+        $sql = 'SELECT `v_id` as `id`, `v_nom` as `nom`, `v_superficie` AS `superficie` FROM `ville` WHERE `v_nom` = :ville';
+
+        $data = DBManager::getInstance()->makeSelect($sql, ['ville', $ville]);
+
+
+        return new Ville($data[0]);
 
     }
 

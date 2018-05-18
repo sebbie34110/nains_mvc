@@ -5,6 +5,7 @@ $villesList = '';
 $groupsList = '';
 $tavernesList = '';
 
+
 foreach ($nains as $nain)
 {
     $nainsList .= '<option value="'.$nain['n_id'].'">'.$nain['n_nom'].'</option>';
@@ -12,17 +13,17 @@ foreach ($nains as $nain)
 
 foreach ($villes as $ville)
 {
-    $villesList .= '<option><a href="?controller=Ville&action=getView&v_id='.$ville['v_id'].'"></a>'.$ville['v_nom'].'</option>';
+    $villesList .= '<option value="'.$ville['v_id'].'"><a href="?controller=Ville&action=getView"></a>'.$ville['v_nom'].'</option>';
 }
 
 foreach ($groups as $group)
 {
-    $groupsList .= '<option><a href="?controller=Groupe&action=getView&g_id='.$group['g_id'].'"></a>'.$group['g_id'].'</option>';
+    $groupsList .= '<option value="'.$group['g_id'].'"><a href="?controller=Group&action=getView"></a>'.$group['g_id'].'</option>';
 }
 
 foreach ($tavernes as $taverne)
 {
-    $tavernesList .= '<option><a href="?controller=Taverne&action=getView&t_id='.$taverne['t_id'].'"></a>'.$taverne['t_nom'].'</option>';
+    $tavernesList .= '<option value="'.$taverne['t_id'].'"><a href="?controller=Taverne&action=getView"></a>'.$taverne['t_nom'].'</option>';
 }
 ?>
 
@@ -55,7 +56,7 @@ foreach ($tavernes as $taverne)
                             <?=$villesList?>
                         </select>
                     </div>
-                    <button type="submit" name="v_submit" value="" class="btn btn-warning">Choisir ville</button>
+                    <button type="submit" name="v_submit" value="1" class="btn btn-warning">Choisir ville</button>
                 </form>
             </div>
             <!-- Choisir groupe -->
@@ -66,7 +67,7 @@ foreach ($tavernes as $taverne)
                             <?=$groupsList?>
                         </select>
                     </div>
-                    <button type="submit" name="g_submit" value="" class="btn btn-warning">Choisir groupe</button>
+                    <button type="submit" name="g_submit" value="1" class="btn btn-warning">Choisir groupe</button>
                 </form>
             </div>
             <!-- Choisir taverne -->
@@ -77,7 +78,7 @@ foreach ($tavernes as $taverne)
                             <?=$tavernesList?>
                         </select>
                     </div>
-                    <button type="submit" name="t_submit" value="" class="btn btn-warning">Choisir taverne</button>
+                    <button type="submit" name="t_submit" value="1" class="btn btn-warning">Choisir taverne</button>
                 </form>
             </div>
         </div>

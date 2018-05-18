@@ -6,10 +6,31 @@
  * Time: 13:59
  */
 
+namespace nains\controller\taverne;
+
+use nains\controller\coreController;
+
+class TaverneController extends coreController
+{
+
+    public function __construct()
+    {
+        $this->className = 'taverne';
+    }
+
+    public function getView($id)
+    {
+
+
+        $this->showView($this->className, [
+            ]);
+    }
+}
+
 
 //Récupartion des infos sur la taverne
 
-if ($_GET['t_id']) {
+/*if ($_GET['t_id']) {
     $t_id = $_GET['t_id'];
 
     $tInfo = tavernePageInfo($t_id);
@@ -22,4 +43,4 @@ if ($_GET['t_id']) {
     $chambres = $tInfo[0]['t_chambres'];
     $chambresLibres = $tInfo[0]['chambresLibres'];
 
-}
+}*/

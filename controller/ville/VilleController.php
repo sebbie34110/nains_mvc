@@ -6,9 +6,29 @@
  * Time: 14:00
  */
 
+namespace nains\controller\ville;
+
+
+use nains\controller\coreController;
+
+class VilleController extends coreController
+{
+    public function __construct()
+    {
+        $this->className = 'ville';
+    }
+
+    public function getView($id)
+    {
+
+
+        $this->showView($this->className, [
+        ]);
+    }
+}
 
 // Récupération des infos de la Ville
-if ($_GET) {
+/*if ($_GET) {
     $v_id = (int)$_GET['v_id'];
 
     $villeInfo = getVilleInfo($v_id);
@@ -27,7 +47,7 @@ if ($_GET) {
     $listeTavernes = '';
     foreach ($taverneInfo as $key) {
         //$listeTavernes .= "<li>".$key['t_nom']."</li>";
-        $listeTavernes .= '<li><a href="TaverneView.php?t_id='.$key['t_id'].'">'.$key['t_nom'].'</a></li>';
+        $listeTavernes .= '<li><a href="Taverne.php?t_id='.$key['t_id'].'">'.$key['t_nom'].'</a></li>';
     }
 
     // Progres des tunnels de la ville
@@ -47,4 +67,4 @@ if ($_GET) {
     foreach ($progres as $p) {
         $progresListe.= "<li>Tunnel vers <a href='ville.php?v_id=".$p['v_id']."'>".$p['villeArrivee']."</a> : ".$p['t_progres']."% terminé.</li>";
     }
-}
+}*/

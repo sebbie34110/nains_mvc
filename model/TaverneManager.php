@@ -8,6 +8,8 @@
 
 namespace nains\model;
 
+use nains\model\entities\Taverne;
+
 class TaverneManager extends HomepageManager
 {
 
@@ -52,6 +54,24 @@ class TaverneManager extends HomepageManager
               GROUP BY `t_id`';
 
       return DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+    }
+
+
+    /**
+     * @param int $id
+     * @return Taverne
+     */
+    public function getTaverneById(int $id) : Taverne
+    {
+
+        $sql = 'SELECT `t_id` AS `id`, `t_nom` as `nom`, `t_chambres` AS `chambres`, `t_blonde` AS `blonde`,
+                `t_brune` AS `brune`, `t_rousse` AS `rousse`, `t_ville_fk` AS `ville` 
+                FROM `taverne` 
+                WHERE `t_id` = :id';
+
+        $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+
+        return new Taverne($data[0]);
     }
 
 

@@ -6,12 +6,61 @@
  * Time: 13:54
  */
 
-namespace nains\controller\groupe;
+namespace nains\controller\group;
 
-class GroupController
+use nains\controller\coreController;
+use nains\model\GroupManager;
+use nains\model\HomepageManager;
+use nains\model\TaverneManager;
+use nains\model\TunnelManager;
+use nains\model\VilleManager;
+
+class GroupController extends coreController
 {
 
-    if (isset($_GET['g_id'])) {
+
+
+    public function __construct()
+    {
+        $this->className = 'group';
+    }
+
+    public function getView(int $id)
+    {
+        $h_manager = new HomepageManager();
+        $g_manager = new GroupManager();
+        $t_manager = new TaverneManager();
+        $tunel_manager = new TunnelManager();
+        $v_manager = new VilleManager();
+
+
+
+        $group = $g_manager->getGroupById($id);
+        $nainsInGroup = $g_manager->getNainsInGroup($id);
+        $taverne = $t_manager->getTaverneById((int)$group->getId());
+        $tunnel = $tunel_manager->getTunnelById((int)$group->getTunnel());
+        $listTavernes = $h_manager->getListeTavernes();
+
+
+       // $villeDepart = $v_manager->getVilleById((int)$tunnel->getVilledepart());
+       // $villeArrivee = $v_manager->getVilleById((int)$tunnel->getVillearrivee());
+
+
+
+        var_dump($group);
+
+
+
+
+        $this->showView($this->className, [
+            'group' => $group,
+            'nainList' => $nainsInGroup,
+            'taverne' => $taverne,
+            'listTavernes' => $listTavernes
+        ]);
+    }
+
+    /*if (isset($_GET['g_id'])) {
     $g_id = (int)$_GET['g_id'];
 
     $infoGroupe = getGroupeInfo($g_id);
@@ -22,7 +71,7 @@ class GroupController
     $nainsGroupe .= '<li>' . $key['n_nom'] . '</li>';
     }
 
-    $taverne = "<a href='TaverneView.php?t_id=".$infoGroupe[0]['t_id']."'>".$infoGroupe[0]['nomTaverne']."</a>";
+    $taverne = "<a href='Taverne.php?t_id=".$infoGroupe[0]['t_id']."'>".$infoGroupe[0]['nomTaverne']."</a>";
 
     // Recupération des villes de départ/arrivée
     $v_depart = (int)$infoGroupe[0]['t_villedepart_fk'];
@@ -31,7 +80,7 @@ class GroupController
 
     $dep = "<a href='ville.php?v_id=".$villes[0]['v_id']."'>".$villes[0]['v_nom']."</a>";
     $arr = "<a href='ville.php?v_id=".$villes[1]['v_id']."'>".$villes[1]['v_nom']."</a>";
-    }
+    }*/
 
 
 

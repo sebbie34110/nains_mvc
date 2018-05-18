@@ -8,8 +8,11 @@
 namespace nains\controller\nain;
 
 use nains\controller\coreController;
-use nains\model\entities\Nain;
+use nains\model\GroupManager;
+use nains\model\HomepageManager;
 use nains\model\NainManager;
+use nains\model\TaverneManager;
+use nains\model\VilleManager;
 
 class NainController extends coreController
 {
@@ -22,16 +25,33 @@ class NainController extends coreController
 
     public function getView($id)
     {
-        $id = (int)$id;
-        $manager = new NainManager();
-        $nainData = new Nain($manager->getNain($id));
-        $location = $manager->getVilleDepartArrivee($id);
 
-        $this->showView($this->className, ['nain' => $nainData, 'depart' => $location[0], 'arrivee' => $location[1]]);
-
-    }
+        $manager = new HomepageManager();
+        $nainManager = new NainManager();
+        $taverneManager = new TaverneManager();
+        $groupManager = new GroupManager();
+        $villeManager = new VilleManager();
 
 
+        $nainData = $nainManager->getNain((int)$id);
+        $groupe = $groupManager->getGroupById((int)$nainData->getGroupe());
+        $villeDepart = $nainManager->getVilleDepart((int)$id);
+        $villeArrivee = $nainManager->getVilleArrivee((int)$id);
+        $taverne = $taverneManager->getTaverneById((int)$nainData->getGroupe());
+        $groupList = $manager->getListeGroupes();
+
+        $villeOrigin = $nainData->getVille();
+       // $villeManager->getVilleById(1);
+        //$villeOrigin = $villeManager->getVilleByName('svarkungor ');
+
+        $this->showView($this->className, [
+            'nain' => $nainData,
+            'groupe' => $groupe,
+            'taverne' => $taverne,
+            'depart' => $villeDepart,
+            'arrivee' => $villeArrivee,
+            'groupList' => $groupList]);
+        }
 }
 
 /*

@@ -8,7 +8,9 @@
 
 namespace nains\model;
 
-class GroupeManager extends HomepageManager
+use nains\model\entities\Nain;
+
+class GroupManager extends HomepageManager
 {
 
 
@@ -57,8 +59,8 @@ class GroupeManager extends HomepageManager
      */
     public function getGroupInfo(int $id) : ? array
     {
-        $sql = 'SELECT `group`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
-        FROM `group`
+        $sql = 'SELECT `groupe`.*, `n_id`, `n_nom`, `taverne`.`t_id` AS taverneId, `taverne`.`t_nom` AS nomTaverne, `tunnel`.*
+        FROM `groupe`
         LEFT JOIN `nain` ON `g_id` = `n_groupe_fk`
         LEFT JOIN `taverne` ON `g_taverne_fk` = `taverne`.`t_id`
         LEFT JOIN `tunnel` ON `g_tunnel_fk` = `tunnel`.`t_id`
@@ -68,7 +70,7 @@ class GroupeManager extends HomepageManager
         return DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
     }
 
-    public function getGroupeById(int $id) : entities\Groupe
+    public function getGroupById(int $id) : entities\Group
     {
         $sql = 'SELECT `g_id` AS `id`, `g_debuttravail` AS `debuttravail` , `g_fintravail` AS `fintravail`, `g_taverne_fk` AS `taverne`, `g_tunnel_fk` AS `tunnel`
         FROM `groupe` 
@@ -76,7 +78,33 @@ class GroupeManager extends HomepageManager
 
         $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
 
-        return new entities\Groupe($data[0]);
+        return new entities\Group($data[0]);
+    }
+
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getNainsInGroup(int $id) : array
+    {
+        $list = [];
+        $m = new NainManager();
+
+
+        $sql = 'SELECT `n_id` FROM `nain` LEFT JOIN `groupe` ON `n_groupe_fk` = `g_id` WHERE `g_id` = :id';
+
+        $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+
+
+        foreach ($data as $key => $nain) {
+
+            $list[] = $m->getNain((int)$nain['n_id']);
+
+        }
+
+        return $list;
+
     }
 
 
