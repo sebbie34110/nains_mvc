@@ -68,6 +68,17 @@ class GroupeManager extends HomepageManager
         return DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
     }
 
+    public function getGroupeById(int $id) : entities\Groupe
+    {
+        $sql = 'SELECT `g_id` AS `id`, `g_debuttravail` AS `debuttravail` , `g_fintravail` AS `fintravail`, `g_taverne_fk` AS `taverne`, `g_tunnel_fk` AS `tunnel`
+        FROM `groupe` 
+        WHERE `g_id`= :id';
+
+        $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);
+
+        return new entities\Groupe($data[0]);
+    }
+
 
 }
 
