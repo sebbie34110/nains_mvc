@@ -80,6 +80,22 @@ class NainManager extends HomepageManager
     }
 
 
+
+    /**
+     * Changer le nain de group
+     * @param int $id     [description]
+     * @param int $groupe [description]
+     */
+     public function changeGroupNain( int $n_id, int $g_id) : void
+     {
+
+       $sql = 'UPDATE `nain` SET `n_groupe_fk`= :g_id WHERE `n_id` = :n_id';
+
+       DBManager::getInstance()->makeSelect($sql, ['g_id' => $g_id, 'n_id' => $n_id]);
+
+     }
+
+
     /**
      * @param int $id
      * @return array

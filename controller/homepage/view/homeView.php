@@ -56,6 +56,8 @@ foreach ($tavernes as $taverne)
                             <?=$villesList?>
                         </select>
                     </div>
+                    <input type="hidden" name="controller" value="Ville">
+                    <input type="hidden" name="action" value="getView">
                     <button type="submit" name="v_submit" value="1" class="btn btn-warning">Choisir ville</button>
                 </form>
             </div>
@@ -67,6 +69,8 @@ foreach ($tavernes as $taverne)
                             <?=$groupsList?>
                         </select>
                     </div>
+                    <input type="hidden" name="controller" value="Group">
+                    <input type="hidden" name="action" value="getView">
                     <button type="submit" name="g_submit" value="1" class="btn btn-warning">Choisir groupe</button>
                 </form>
             </div>
@@ -78,6 +82,8 @@ foreach ($tavernes as $taverne)
                             <?=$tavernesList?>
                         </select>
                     </div>
+                    <input type="hidden" name="controller" value="Tavern">
+                    <input type="hidden" name="action" value="getView">
                     <button type="submit" name="t_submit" value="1" class="btn btn-warning">Choisir taverne</button>
                 </form>
             </div>

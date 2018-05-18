@@ -25,21 +25,23 @@ $msgClass='';
       <?php endif; ?>
 
 
-      <form class="form" action=" <?= $_SERVER['PHP_SELF'] ?> " method="GET">
+      <form class="form" action="" method="GET">
         <div class="form-group">
           <label for="groupe">Assigner le nain à un nouveau groupe :</label>
-          <select name="groupe" class="form-control" id="groupe">
+          <select name="g_id" class="form-control" id="groupe">
         <?php
             foreach ($groupList as $group)
             {
-                echo '<option><a href="?controller=Groupe&action=getView&g_id='.$group['g_id'].'"></a>'.$group['g_id'].'</option>';
+                echo '<option value="'.$group['g_id'].'">'.$group['g_id'].'</option>';
             }
         ?>
           </select>
-          <input type="hidden" name="id_nain" value="<?=$nain->getNom()?>">
+          <input type="hidden" name="controller" value="Nain">
+          <input type="hidden" name="action" value="getView">
+          <input type="hidden" name="n_id" value="<?=$nain->getId()?>">
 
         </div>
-        <button type="submit" name="change_groupe" value="" class="btn btn-primary mb-2">Changer</button>
+        <button type="submit" name="change_group" value="" class="btn btn-primary mb-2">Changer</button>
       </form>
     </div>
   </div>

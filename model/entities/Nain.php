@@ -33,6 +33,11 @@ class Nain
             $method = 'set' . ucfirst($key);
 
             if (method_exists($this, $method)) {
+
+                if (is_numeric($val)){
+                    $val = (int)$val;
+                }
+
                 $this->$method($val);
             }
         }

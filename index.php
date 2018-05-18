@@ -1,43 +1,11 @@
 <?php declare(strict_types=1);
 
 namespace nains;
-use nains\model\DBManager;
+
 require ('config.php');
 
 
 $params = '';
-
-if(!empty($_GET['controller'])) {
-    $controller = $_GET['controller'];
-} else {
-        $controller = "Homepage";
-        $params = '';
-}
-
-// Nains
-if(isset($_GET['n_submit']) && !empty($_GET['n_submit'])) {
-    $controller = 'Nain';
-    $params = (int)$_GET['n_id'];
-}
-
-// Villes
-if(isset($_GET['v_submit']) && !empty($_GET['v_submit'])) {
-    $controller = 'Ville';
-    $params = (int)$_GET['v_id'];
-}
-
-// Groupes
-if(isset($_GET['g_submit']) && !empty($_GET['g_submit'])) {
-    $controller = 'Group';
-    $params = (int)$_GET['g_id'];
-}
-
-// Tavernes
-if(isset($_GET['t_submit']) && !empty($_GET['t_submit'])) {
-    $controller = 'Taverne';
-    $params = (int)$_GET['t_id'];
-}
-
 
 if(!empty($_GET['action'])) {
     $action = $_GET['action'];
@@ -45,7 +13,46 @@ if(!empty($_GET['action'])) {
     $action = "getView";
 }
 
+if(!empty($_GET['controller'])) {
+    $controller = $_GET['controller'];
+} else {
+    $controller = "Homepage";
+}
+
+if (!empty($_GET)) {
+
+    if (!empty($_GET['controller']) && !empty($_GET['action'])) {
+
+        switch ($_GET['controller']) {
+            case 'Nain':
+                $controller = 'Nain';
+                $params = (int)$_GET['n_id'];
+                break;
+
+            case 'Ville':
+                $controller = 'Ville';
+                $params = (int)$_GET['v_id'];
+                break;
+
+            case 'Group':
+                $controller = 'Group';
+                $params = (int)$_GET['g_id'];
+                break;
+
+            case 'Taverne':
+                $controller = 'Taverne';
+                $params = (int)$_GET['t_id'];
+                break;
+
+            default:
+                $controller = "Homepage";
+                $params = '';
+        }
+    }
+}
+
 $nomController = 'nains\controller\\'.strtolower($controller).'\\'.$controller.'Controller';
+
 try {
     if (class_exists($nomController) && method_exists($nomController, $action)) {
         $c = new $nomController();

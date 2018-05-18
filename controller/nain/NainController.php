@@ -34,15 +34,15 @@ class NainController extends coreController
 
 
         $nainData = $nainManager->getNain((int)$id);
-        $groupe = $groupManager->getGroupById((int)$nainData->getGroupe());
+        $groupe = $groupManager->getGroupById($nainData->getGroupe());
         $villeDepart = $nainManager->getVilleDepart((int)$id);
         $villeArrivee = $nainManager->getVilleArrivee((int)$id);
         $taverne = $taverneManager->getTaverneById((int)$nainData->getGroupe());
         $groupList = $manager->getListeGroupes();
 
-        $villeOrigin = $nainData->getVille();
-       // $villeManager->getVilleById(1);
-        //$villeOrigin = $villeManager->getVilleByName('svarkungor ');
+        if (isset($_GET['change_group'])){
+            echo 'Faire le changement de groupe';
+        }
 
         $this->showView($this->className, [
             'nain' => $nainData,
