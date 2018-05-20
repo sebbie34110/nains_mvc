@@ -14,6 +14,13 @@ use nains\model\entities\Tunnel;
 class TunnelManager extends HomepageManager
 {
 
+  public function getTunnelList() : array
+  {
+    $sql = 'SELECT `t_id` AS id FROM `tunnel` ORDER BY `t_id` ASC';
+
+    return DBManager::getInstance()->makeSelect($sql);
+  }
+
 
     /**
      * @param int $id
@@ -41,8 +48,6 @@ class TunnelManager extends HomepageManager
       $sql = 'SELECT `t_id` AS `id`, `t_progres` as `progres`, `t_villedepart_fk` AS `villedepart`, `t_villearrivee_fk` AS `villearrivee` FROM `tunnel` LEFT JOIN `ville` ON `v_id` = `t_villedepart_fk` WHERE `t_villearrivee_fk` = :id OR `t_villedepart_fk` = :id ;';
 
       $data = DBManager::getInstance()->makeSelect($sql, [':id' => $v_id]);
-
-      var_dump($data);
 
       foreach($data as $key => $tunnel){
         $tunnels[] = new Tunnel($tunnel);

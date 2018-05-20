@@ -80,12 +80,12 @@ class VilleManager extends HomepageManager
      */
     public function getVilleByName(string $ville) : Ville {
 
-        $sql = 'SELECT `v_id` as `id`, `v_nom` as `nom`, `v_superficie` AS `superficie` FROM `ville` WHERE `v_nom` = :ville';
+        $sql = 'SELECT `v_id` as `id`, `v_nom` as `nom`, `v_superficie` AS `superficie` FROM `ville` WHERE `v_nom` = ?';
 
-        $data = DBManager::getInstance()->makeSelect($sql, ['ville', $ville]);
+        $data = DBManager::getInstance()->makeSelect($sql, ['1', $ville]);
 
 
-        return new Ville($data[0]);
+        return new entities\Ville($data[0]);
 
     }
 

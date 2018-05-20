@@ -13,6 +13,15 @@ use nains\model\entities\Nain;
 class GroupManager extends HomepageManager
 {
 
+  public function updateGroupInfo($data) : void
+  {
+
+    // $sql = 'UPDATE `nain` SET `n_groupe_fk`= '.$g_id.' WHERE `n_id` = '.$n_id;
+    //
+    // DBManager::getInstance()->makeUpdate($sql);
+
+  }
+
 
     /**
      * @return array|null
@@ -20,7 +29,7 @@ class GroupManager extends HomepageManager
     public function getListeGroupes() : ? array
     {
 
-        $sql = 'SELECT `g_id` FROM `group` ORDER BY `g_id` ASC';
+        $sql = 'SELECT `g_id` FROM `groupe` ORDER BY `g_id` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
@@ -30,10 +39,10 @@ class GroupManager extends HomepageManager
     /**
      * @return array|null
      */
-    public function getHorairesDebut() : ? array
+    public function getStartingHours() : ? array
     {
 
-        $sql = 'SELECT `g_debuttravail` AS debut FROM `group` GROUP BY `g_debuttravail` ORDER BY `g_debuttravail` ASC';
+        $sql = 'SELECT `g_debuttravail` AS debut FROM `groupe` GROUP BY `g_debuttravail` ORDER BY `g_debuttravail` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
@@ -43,10 +52,10 @@ class GroupManager extends HomepageManager
     /**
      * @return array|null
      */
-    public function getHorairesFin() : ? array
+    public function getFinishingHours() : ? array
     {
 
-        $sql = 'SELECT `g_fintravail` AS fin FROM `group` GROUP BY `g_fintravail` ORDER BY `g_fintravail` ASC';
+        $sql = 'SELECT `g_fintravail` AS fin FROM `groupe` GROUP BY `g_fintravail` ORDER BY `g_fintravail` ASC';
 
         return DBManager::getInstance()->makeSelect($sql);
 
@@ -73,7 +82,7 @@ class GroupManager extends HomepageManager
     public function getGroupById(int $id) : entities\Group
     {
         $sql = 'SELECT `g_id` AS `id`, `g_debuttravail` AS `debuttravail` , `g_fintravail` AS `fintravail`, `g_taverne_fk` AS `taverne`, `g_tunnel_fk` AS `tunnel`
-        FROM `groupe` 
+        FROM `groupe`
         WHERE `g_id`= :id';
 
         $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);

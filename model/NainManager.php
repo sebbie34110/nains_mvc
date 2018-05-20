@@ -40,7 +40,7 @@ class NainManager extends HomepageManager
     public function getNain(int $id) {
 
 
-            $sql = 'SELECT `n_id` AS `id`, `n_nom` AS `nom`, `n_barbe` AS `barbe`, `v_nom` AS `ville`, `n_groupe_fk` AS `groupe`
+            $sql = 'SELECT `n_id` AS `id`, `n_nom` AS `nom`, `n_barbe` AS `barbe`, `v_id` AS `ville`, `n_groupe_fk` AS `groupe`
                     FROM `nain`
                     LEFT JOIN `ville` ON `n_ville_fk` = `v_id`
                     WHERE `n_id`= :id';
@@ -70,7 +70,7 @@ class NainManager extends HomepageManager
             foreach($data as $key => $nain){
               $nains[] = new entities\Nain($nain);
             }
-           
+
            return $nains ;
     }
 

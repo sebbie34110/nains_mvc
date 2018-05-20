@@ -40,24 +40,42 @@ class GroupController extends coreController
         $taverne = $t_manager->getTaverneById((int)$group->getId());
         $tunnel = $tunel_manager->getTunnelById((int)$group->getTunnel());
         $listTavernes = $h_manager->getListeTavernes();
+        $startingHours = $g_manager->getStartingHours();
+        $finishingHours = $g_manager->getFinishingHours();
+        $tunnelList = $tunel_manager->getTunnelList();
+        $villeDepart = $v_manager->getVilleById($tunnel->getVilledepart());
+        $villeArrivee = $v_manager->getVilleById($tunnel->getVillearrivee());
+
+        if (isset($_GET['update_group'])) {
+          // verifier que la taverne ne soit pas full
+
+          
+
+        }
 
 
-       // $villeDepart = $v_manager->getVilleById((int)$tunnel->getVilledepart());
-       // $villeArrivee = $v_manager->getVilleById((int)$tunnel->getVillearrivee());
 
-
-
-        var_dump($group);
 
 
 
 
         $this->showView($this->className, [
             'group' => $group,
+            'tunnel' => $tunnel,
             'nainList' => $nainsInGroup,
+            'villeDepart' => $villeDepart,
+            'villeArrivee' => $villeArrivee,
             'taverne' => $taverne,
-            'listTavernes' => $listTavernes
+            'listTavernes' => $listTavernes,
+            'startingHours' => $startingHours,
+            'finishingHours' => $finishingHours,
+            'tunnelList' => $tunnelList
         ]);
+
+
+
+
+
     }
 
     /*if (isset($_GET['g_id'])) {
@@ -85,10 +103,3 @@ class GroupController extends coreController
 
 
 }
-
-
-
-
-
-
-

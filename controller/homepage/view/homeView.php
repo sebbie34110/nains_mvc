@@ -13,17 +13,17 @@ foreach ($nains as $nain)
 
 foreach ($villes as $ville)
 {
-    $villesList .= '<option value="'.$ville['v_id'].'"><a href="?controller=Ville&action=getView"></a>'.$ville['v_nom'].'</option>';
+    $villesList .= '<option value="'.$ville['v_id'].'">'.$ville['v_nom'].'</option>';
 }
 
 foreach ($groups as $group)
 {
-    $groupsList .= '<option value="'.$group['g_id'].'"><a href="?controller=Group&action=getView"></a>'.$group['g_id'].'</option>';
+    $groupsList .= '<option value="'.$group['g_id'].'">Groupe n°'.$group['g_id'].'</option>';
 }
 
 foreach ($tavernes as $taverne)
 {
-    $tavernesList .= '<option value="'.$taverne['t_id'].'"><a href="?controller=Taverne&action=getView"></a>'.$taverne['t_nom'].'</option>';
+    $tavernesList .= '<option value="'.$taverne['t_id'].'">'.$taverne['t_nom'].'</option>';
 }
 ?>
 
@@ -82,7 +82,7 @@ foreach ($tavernes as $taverne)
                             <?=$tavernesList?>
                         </select>
                     </div>
-                    <input type="hidden" name="controller" value="Tavern">
+                    <input type="hidden" name="controller" value="Taverne">
                     <input type="hidden" name="action" value="getView">
                     <button type="submit" name="t_submit" value="1" class="btn btn-warning">Choisir taverne</button>
                 </form>
