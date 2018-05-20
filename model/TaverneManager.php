@@ -17,12 +17,20 @@ class TaverneManager extends HomepageManager
      * @param int $v_id
      * @return array|null
      */
-    public function getTavernesInCity(int $v_id) : ? array
+    public function getTavernesInVille(int $v_id) : ? array
     {
+      $tavernes = [];
 
-        $sql = 'SELECT `t_nom`, `t_id`  FROM `taverne` INNER JOIN `ville` ON `t_ville_fk` = `v_id` WHERE `v_id` = :v_id';
+      $sql = 'SELECT `t_id` AS `id`, `t_nom` as `nom`, `t_chambres` AS `chambres`, `t_blonde` AS `blonde`,
+              `t_brune` AS `brune`, `t_rousse` AS `rousse`, `t_ville_fk` AS `ville` FROM `taverne` INNER JOIN `ville` ON `t_ville_fk` = `v_id` WHERE `v_id` = :v_id';
 
-        return DBManager::getInstance()->makeSelect($sql, [':v_id' => $v_id]);
+      $data = DBManager::getInstance()->makeSelect($sql, [':v_id' => $v_id]);
+
+      foreach($data as $key => $taverne){
+        $tavernes[] = new Taverne($taverne);
+      }
+
+      return $tavernes;
     }
 
     /**
@@ -65,8 +73,8 @@ class TaverneManager extends HomepageManager
     {
 
         $sql = 'SELECT `t_id` AS `id`, `t_nom` as `nom`, `t_chambres` AS `chambres`, `t_blonde` AS `blonde`,
-                `t_brune` AS `brune`, `t_rousse` AS `rousse`, `t_ville_fk` AS `ville` 
-                FROM `taverne` 
+                `t_brune` AS `brune`, `t_rousse` AS `rousse`, `t_ville_fk` AS `ville`
+                FROM `taverne`
                 WHERE `t_id` = :id';
 
         $data = DBManager::getInstance()->makeSelect($sql, [':id' => $id]);

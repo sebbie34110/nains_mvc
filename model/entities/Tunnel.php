@@ -24,10 +24,16 @@ class Tunnel
     // Hydratation
     public function hydrate(array $data){
         foreach ($data as $key => $val){
+
             $method = 'set' . ucfirst($key);
 
             if (method_exists($this, $method)){
-                $this->$method($val);
+
+              if (is_numeric($val)){
+                  $val = (int)$val;
+              }
+
+              $this->$method($val);
             }
         }
     }
@@ -57,6 +63,14 @@ class Tunnel
     }
 
     /**
+     * @param mixed $id
+     */
+    public function setProgres($progres)
+    {
+        $this->progres = $progres;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -80,7 +94,12 @@ class Tunnel
         return $this->villearrivee;
     }
 
-
-
+    /**
+     * @return mixed
+     */
+    public function getProgres()
+    {
+        return $this->progres;
+    }
 
 }

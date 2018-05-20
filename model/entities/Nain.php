@@ -9,9 +9,6 @@
 namespace nains\model\entities;
 
 
-
-use nains\model\VilleManager;
-
 class Nain
 {
 

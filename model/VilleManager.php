@@ -66,10 +66,10 @@ class VilleManager extends HomepageManager
 
             $sql = 'SELECT `v_id` as `id`, `v_nom` as `nom`, `v_superficie` AS `superficie` FROM `ville` WHERE `v_id` = :id';
 
-            $data = DBManager::getInstance()->makeSelect($sql, ['id', $id]);
+            $data = DBManager::getInstance()->makeSelect($sql, ['id' => $id]);
 
 
-        return new Ville($data[0]);
+        return new entities\Ville($data[0]);
 
     }
 

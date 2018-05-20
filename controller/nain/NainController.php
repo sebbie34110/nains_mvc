@@ -13,6 +13,7 @@ use nains\model\HomepageManager;
 use nains\model\NainManager;
 use nains\model\TaverneManager;
 use nains\model\VilleManager;
+use nains\model\TunnelManager;
 
 class NainController extends coreController
 {
@@ -20,7 +21,6 @@ class NainController extends coreController
     {
         $this->className = 'nain';
     }
-
 
 
     public function getView($id)
@@ -31,17 +31,32 @@ class NainController extends coreController
         $taverneManager = new TaverneManager();
         $groupManager = new GroupManager();
         $villeManager = new VilleManager();
+        $tunnelManager = new TunnelManager();
 
 
         $nainData = $nainManager->getNain((int)$id);
-        $groupe = $groupManager->getGroupById($nainData->getGroupe());
-        $villeDepart = $nainManager->getVilleDepart((int)$id);
-        $villeArrivee = $nainManager->getVilleArrivee((int)$id);
+
         $taverne = $taverneManager->getTaverneById((int)$nainData->getGroupe());
+
+        $groupe = $groupManager->getGroupById($nainData->getGroupe());  // problème avec le progres du tunnel (NULL)
         $groupList = $manager->getListeGroupes();
 
+        $tunnel = $tunnelManager->getTunnelById($groupe->getTunnel());
+        //$villeDepart = $villeManager->getVilleById($tunnel->getVilledepart());
+        //$villeArrivee = $villeManager->getVilleById($tunnel->getVillearrivee());
+
         if (isset($_GET['change_group'])){
-            echo 'Faire le changement de groupe';
+
+            $n_id = (int)$_GET['n_id'];
+            $g_id = (int)$_GET['g_id'];
+
+            try {
+              $nainManager->changeGroupNain($n_id, $g_id);
+            } catch (\PDOException $e) {
+              echo $e->getMessage();
+            }
+
+
         }
 
         $this->showView($this->className, [
@@ -50,7 +65,12 @@ class NainController extends coreController
             'taverne' => $taverne,
             'depart' => $villeDepart,
             'arrivee' => $villeArrivee,
-            'groupList' => $groupList]);
+            'groupList' => $groupList,
+            'tunnel' => $tunnel
+          ]);
+
+
+
         }
 }
 

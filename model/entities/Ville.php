@@ -8,7 +8,6 @@
 
 namespace nains\model\entities;
 
-
 class Ville
 {
 
@@ -25,10 +24,17 @@ class Ville
     // Hydratation
     public function hydrate(array $data){
         foreach ($data as $key => $val){
+
             $method = 'set' . ucfirst($key);
 
             if (method_exists($this, $method)){
+
+                if (is_numeric($val)){
+                    $val = (int)$val;
+                }
+
                 $this->$method($val);
+
             }
         }
     }
@@ -80,8 +86,4 @@ class Ville
     {
         return $this->superficie;
     }
-
-
-
-
 }

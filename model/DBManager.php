@@ -36,6 +36,28 @@ class DBManager
         return self::$instance;
     }
 
+    public function makeUpdate(string $sql, array $params = array())
+    {
+      if (!$params) {
+        $stm = $this->pdo->query($sql);
+        $stm -> execute();
+
+        if ($stm === false) {
+
+            $message = "query n'a pas marché";
+            throw new Exception($message);
+        }
+      } else {
+
+        foreach($params as $placeholder => $variable)
+        {
+          $stm->bindValue($placeholder, $variable);
+        }
+
+        $stm->execute();
+      }
+    }
+
 
     //Generates a PDOStatement using query or prepare, depending on $params composition
     //$sql is your query
@@ -86,4 +108,3 @@ class DBManager
         return $data;
     }
 }
-
