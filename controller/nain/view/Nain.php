@@ -1,15 +1,8 @@
-<?php
-$msg='';
-$msgClass='';
-?>
-
-
 <div class="container">
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <h1 class="mb-3">Nain</h1>
-      <p class="rounded text-light text-center bg <?php if ($msgClass!=='') { echo $msgClass; }?> pt-1 pb-1"><?php if ($msg!=='') { echo $msg; }?></p>
-
+      
       <p><strong>Nom : </strong> <?=$nain->getNom()?></p>
 
       <p><strong>Longueur de barbe :</strong> <?= $nain->getBarbe() ?> cm</p>

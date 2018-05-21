@@ -7,16 +7,17 @@
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <h1 class="mb-3">Taverne</h1>
-      <p>Nom : <?=$nom?>.</p>
-      <p>Ville : <?=$ville?>.</p>
-      <p>Possède de la bière :</p>
+      <p><strong>Nom :</strong> <?=$taverne->getNom()?></p>
+      <p><strong>Ville :</strong> <a href="?controller=Ville&action=getView&v_id=<?=$ville->getId()?>"><?=$ville->getNom()?></a> </p>
+      <p><strong>Bières disponibles :</strong> </p>
       <ul>
-        <?php echo ($tInfo[0]['t_blonde'] == 1) ? $blonde : '' ; ?>
-        <?php echo ($tInfo[0]['t_brune'] == 1) ? $brune : '' ; ?>
-        <?php echo ($tInfo[0]['t_rousse'] == 1) ? $rousse : '' ; ?>
+        <?php
+      echo  $taverne->getBlonde() == 1 ? '<li>Blonde</li>' : '';
+      echo  $taverne->getBrune() == 1 ? '<li>Brune</li>' : '';
+      echo  $taverne->getRousse() == 1 ? '<li>Rousse</li>' : '';
+        ?>
       </ul>
-      <p>La taverne a <?=$chambres?> chambres, dont <?=$chambresLibres?> libres.</p>
+      <p>La taverne a <?=$taverne->getChambres()?> chambres, dont <?=$rooms['chambresLibres']?> libres.</p>
     </div>
   </div>
 </div>
-

@@ -9,6 +9,10 @@
 namespace nains\controller\taverne;
 
 use nains\controller\coreController;
+use nains\model\TaverneManager;
+use nains\model\VilleManager;
+
+
 
 class TaverneController extends coreController
 {
@@ -21,26 +25,18 @@ class TaverneController extends coreController
     public function getView($id)
     {
 
+      $tav_manager = new TaverneManager();
+      $v_manager = new VilleManager();
+
+
+      $taverne = $tav_manager->getTaverneById($id);
+      $ville = $v_manager->getVilleById($taverne->getVille());
+      $rooms = $tav_manager->availableRooms($id);
 
         $this->showView($this->className, [
+          'taverne' => $taverne,
+          'ville' => $ville,
+          'rooms' => $rooms
             ]);
     }
 }
-
-
-//Récupartion des infos sur la taverne
-
-/*if ($_GET['t_id']) {
-    $t_id = $_GET['t_id'];
-
-    $tInfo = tavernePageInfo($t_id);
-
-    $nom = $tInfo[0]['t_nom'];
-    $ville = "<a href='ville.php?v_id=".$tInfo[0]['t_ville_fk']."'>".$tInfo[0]['v_nom']."</a>";
-    $blonde = '<li>blonde</li>';
-    $brune = '<li>brune</li>';
-    $rousse = '<li>rousse</li>';
-    $chambres = $tInfo[0]['t_chambres'];
-    $chambresLibres = $tInfo[0]['chambresLibres'];
-
-}*/

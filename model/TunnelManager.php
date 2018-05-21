@@ -8,8 +8,9 @@
 
 namespace nains\model;
 
-
 use nains\model\entities\Tunnel;
+
+
 
 class TunnelManager extends HomepageManager
 {
@@ -55,7 +56,4 @@ class TunnelManager extends HomepageManager
 
       return $tunnels;
     }
-
-
-
-}
+} // End of class

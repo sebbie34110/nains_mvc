@@ -8,10 +8,9 @@
 
 namespace nains\model;
 
+
 class HomepageManager
 {
-
-
     /**
      * @return array|null
      */

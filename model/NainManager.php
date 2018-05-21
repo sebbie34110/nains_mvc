@@ -10,6 +10,8 @@ namespace nains\model;
 
 use nains\model\entities;
 
+
+
 class NainManager extends HomepageManager
 {
 
@@ -118,56 +120,4 @@ class NainManager extends HomepageManager
        DBManager::getInstance()->makeUpdate($sql);
 
      }
-
-
-    /**
-     * @param int $id
-     * @return array
-     */
-    /*public function getVilleDepartArrivee(int $id) : array {
-
-        $sql = "SELECT v_nom AS departArrivee, v_id AS id
-              FROM ville
-              INNER JOIN tunnel ON v_id = t_villedepart_fk
-              INNER JOIN groupe ON t_id = g_tunnel_fk
-              WHERE g_id = :id
-              UNION
-              SELECT v_nom AS departArrivee, v_id AS id
-              FROM ville
-              INNER JOIN tunnel ON v_id = t_villearrivee_fk
-              INNER JOIN groupe ON t_id = g_tunnel_fk
-              WHERE g_id = :id";
-
-        $data = DBManager::getInstance()->makeSelect($sql, ['id' => $id]);
-
-        $villes = [];
-
-        foreach ($data as $ville){
-            $villes[] = new entities\Ville($ville);
-
-        }
-
-        var_dump($data);
-
-        return $villes;
-
-    }*/
-
-    /**
-    * Changer le nain de group
-    * @param int $id     [description]
-    * @param int $groupe [description]
-    */
-   /* public function changeGroupe( int $id, int $groupe) : void
-    {
-
-      $sql = 'UPDATE `nain` SET `n_groupe_fk`= :idGroupe WHERE `n_id` = :idNain';
-
-      $q = DBManager::getInstance();
-      $q->prepare($sql);
-      $q->execute();
-    }*/
-
-
-
-}
+} // End of class

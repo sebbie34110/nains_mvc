@@ -44,7 +44,7 @@ foreach ($tavernes as $taverne)
                     </div>
                     <input type="hidden" name="controller" value="Nain">
                     <input type="hidden" name="action" value="getView">
-                    <button type="submit" name="n_submit" value="1" class="btn btn-warning">Choisir nain</button>
+                    <button type="submit" name="n_submit" value="1" class="btn btn-primary">Choisir nain</button>
                 </form>
             </div>
 
@@ -58,7 +58,7 @@ foreach ($tavernes as $taverne)
                     </div>
                     <input type="hidden" name="controller" value="Ville">
                     <input type="hidden" name="action" value="getView">
-                    <button type="submit" name="v_submit" value="1" class="btn btn-warning">Choisir ville</button>
+                    <button type="submit" name="v_submit" value="1" class="btn btn-primary">Choisir ville</button>
                 </form>
             </div>
             <!-- Choisir groupe -->
@@ -71,7 +71,7 @@ foreach ($tavernes as $taverne)
                     </div>
                     <input type="hidden" name="controller" value="Group">
                     <input type="hidden" name="action" value="getView">
-                    <button type="submit" name="g_submit" value="1" class="btn btn-warning">Choisir groupe</button>
+                    <button type="submit" name="g_submit" value="1" class="btn btn-primary">Choisir groupe</button>
                 </form>
             </div>
             <!-- Choisir taverne -->
@@ -84,7 +84,7 @@ foreach ($tavernes as $taverne)
                     </div>
                     <input type="hidden" name="controller" value="Taverne">
                     <input type="hidden" name="action" value="getView">
-                    <button type="submit" name="t_submit" value="1" class="btn btn-warning">Choisir taverne</button>
+                    <button type="submit" name="t_submit" value="1" class="btn btn-primary">Choisir taverne</button>
                 </form>
             </div>
         </div>

@@ -8,13 +8,12 @@
 
 namespace nains\model;
 
-
 use nains\model\entities\Ville;
+
+
 
 class VilleManager extends HomepageManager
 {
-
-
     /**
      * @return array
      */
@@ -99,24 +98,21 @@ class VilleManager extends HomepageManager
      * @param  int   $arrivee [description]
      * @return array          [description]
      */
-    public function getVille(int $depart, int $arrivee) : array
-    {
-      $sql = 'SELECT `v_nom`, `v_id`
-              FROM `ville`
-              INNER JOIN `tunnel` ON `v_id` = `t_villedepart_fk`
-              WHERE `t_villedepart_fk` = :depart
-              UNION
-              SELECT `v_nom`, `v_id`
-              FROM `ville`
-              INNER JOIN `tunnel` ON `v_id` = `t_villearrivee_fk`
-              WHERE `t_villearrivee_fk` = :arrivee';
-
-
-      return DBManager::getInstance()->makeSelect($sql, [':depart' => $depart, ':arrivee' => $arrivee]);
-    }
-
-
-
-
-
+    // public function getVille(int $depart, int $arrivee) : array
+    // {
+    //   $sql = 'SELECT `v_nom`, `v_id`
+    //           FROM `ville`
+    //           INNER JOIN `tunnel` ON `v_id` = `t_villedepart_fk`
+    //           WHERE `t_villedepart_fk` = :depart
+    //           UNION
+    //           SELECT `v_nom`, `v_id`
+    //           FROM `ville`
+    //           INNER JOIN `tunnel` ON `v_id` = `t_villearrivee_fk`
+    //           WHERE `t_villearrivee_fk` = :arrivee';
+    //
+    //
+    //   return DBManager::getInstance()->makeSelect($sql, [':depart' => $depart, ':arrivee' => $arrivee]);
+    // }
+    //
+    // 
 }
