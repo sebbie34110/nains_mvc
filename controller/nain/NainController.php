@@ -72,10 +72,3 @@ class NainController extends coreController
           ]);
         }
 } // End of class
-
-/*
-    // Reaffichage de la page avec les infos à jour
-    $info = getNainInfo($idNain);
-    $msg='Changement effectué!';
-    $msgClass='bg-success';
-}*/

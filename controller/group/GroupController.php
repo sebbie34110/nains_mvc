@@ -17,9 +17,6 @@ use nains\model\VilleManager;
 
 class GroupController extends coreController
 {
-
-
-
     public function __construct()
     {
         $this->className = 'group';
@@ -46,18 +43,32 @@ class GroupController extends coreController
         $villeDepart = $v_manager->getVilleById($tunnel->getVilledepart());
         $villeArrivee = $v_manager->getVilleById($tunnel->getVillearrivee());
 
-        if (isset($_GET['update_group'])) {
-          // verifier que la taverne ne soit pas full
+        //var_dump($group->getId());
 
-          
+        if (isset($_GET['update_group']))
+        {
+            $startingHour = $_GET['debut_travail'];
+            $finishingHour = $_GET['fin_travail'];
+            $newTunnel = (int)$_GET['tunnel'];
+            $newTaverne = (int)$_GET['taverne'];
 
+            $countNainInGroup = $g_manager->countNainsInGroup($group->getId());
+            $availableRooms = $t_manager->availableRooms((int)$newTaverne);
+
+            if ($countNainInGroup > $availableRooms)
+            {
+              echo "Il n'y a pas assez de place dans la taverne.";
+            } else
+              {
+                try
+                {
+                  $g_manager->updateGroupInfo($group->getId(), $startingHour, $finishingHour, $newTunnel, $newTaverne);
+                } catch (PDOException $e)
+                  {
+                    echo "error:" . $e->getMessage();
+                  }
+              }
         }
-
-
-
-
-
-
 
         $this->showView($this->className, [
             'group' => $group,
@@ -71,35 +82,5 @@ class GroupController extends coreController
             'finishingHours' => $finishingHours,
             'tunnelList' => $tunnelList
         ]);
-
-
-
-
-
     }
-
-    /*if (isset($_GET['g_id'])) {
-    $g_id = (int)$_GET['g_id'];
-
-    $infoGroupe = getGroupeInfo($g_id);
-
-    // Liste des nains du group
-    $nainsGroupe = '';
-    foreach ($infoGroupe as $key) {
-    $nainsGroupe .= '<li>' . $key['n_nom'] . '</li>';
-    }
-
-    $taverne = "<a href='Taverne.php?t_id=".$infoGroupe[0]['t_id']."'>".$infoGroupe[0]['nomTaverne']."</a>";
-
-    // Recupération des villes de départ/arrivée
-    $v_depart = (int)$infoGroupe[0]['t_villedepart_fk'];
-    $v_arrivee = (int)$infoGroupe[0]['t_villearrivee_fk'];
-    $villes = getVille($v_depart, $v_arrivee);
-
-    $dep = "<a href='ville.php?v_id=".$villes[0]['v_id']."'>".$villes[0]['v_nom']."</a>";
-    $arr = "<a href='ville.php?v_id=".$villes[1]['v_id']."'>".$villes[1]['v_nom']."</a>";
-    }*/
-
-
-
-}
+} // End of class

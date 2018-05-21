@@ -13,13 +13,26 @@ use nains\model\entities\Nain;
 class GroupManager extends HomepageManager
 {
 
-  public function updateGroupInfo($data) : void
+  public function updateGroupInfo(int $g_id, $start, $finish, int $tunnel, int $taverne) : void
   {
 
-    // $sql = 'UPDATE `nain` SET `n_groupe_fk`= '.$g_id.' WHERE `n_id` = '.$n_id;
-    //
-    // DBManager::getInstance()->makeUpdate($sql);
+    $sql = 'UPDATE `groupe`
+            SET `g_debuttravail` = ?,
+                `g_fintravail` = ?,
+                `g_taverne_fk` = ?,
+                `g_tunnel_fk` = ?
+            WHERE `g_id` = ?';
 
+    DBManager::getInstance()->makeUpdate($sql, [1 => $start, 2 => $finish, 3 => $taverne, 4 => $tunnel, 5 => $g_id]);
+  }
+
+  public function countNainsInGroup(int $g_id)
+  {
+    $sql = 'SELECT count(`n_id`) AS `count` FROM `nain` LEFT JOIN `groupe` ON `n_groupe_fk` = `g_id` WHERE `g_id` = :g_id';
+
+    $result = DBManager::getInstance()->makeSelect($sql, [':g_id' => $g_id]);
+
+    return $result[0];
   }
 
 

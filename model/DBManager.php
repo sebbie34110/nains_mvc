@@ -48,6 +48,7 @@ class DBManager
             throw new Exception($message);
         }
       } else {
+        $stm = $this->pdo->prepare($sql);
 
         foreach($params as $placeholder => $variable)
         {

@@ -25,7 +25,7 @@
         <h4 class="mt-3">Modifier le groupe:</h4>
 
 
-        <form class="form" action=" <?= $_SERVER['PHP_SELF'] ?> " method="GET">
+        <form class="form" action="" method="GET">
 
         <div class="form-group">
           <label for="debut_travail">Heure de début de travail :</label>
@@ -66,7 +66,8 @@
           </select>
         </div>
 
-
+        <input type="hidden" name="controller" value="Group">
+        <input type="hidden" name="action" value="getView">
         <input type="hidden" name="g_id" value="<?=$group->getId()?>">
         <button type="submit" name="update_group" value="" class="btn btn-primary">Changer</button>
 
