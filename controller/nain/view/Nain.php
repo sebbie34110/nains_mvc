@@ -22,12 +22,12 @@
         <div class="form-group">
           <label for="groupe">Assigner le nain à un nouveau groupe :</label>
           <select name="g_id" class="form-control" id="groupe">
-        <?php
-            foreach ($groupList as $group)
-            {
-                echo '<option value="'.$group['g_id'].'">'.$group['g_id'].'</option>';
-            }
-        ?>
+        <?php foreach ($groupList as $group) { ?>
+
+
+            <option <?= ((int)$group['g_id'] == $nain->getGroupe()) ? "SELECTED" : ""?> value="<?=$group['g_id']?>"><?=$group['g_id']?></option>
+
+         <?php } ?>
           </select>
           <input type="hidden" name="controller" value="Nain">
           <input type="hidden" name="action" value="getView">

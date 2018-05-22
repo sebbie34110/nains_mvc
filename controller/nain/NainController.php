@@ -33,6 +33,20 @@ class NainController extends coreController
         $villeManager = new VilleManager();
         $tunnelManager = new TunnelManager();
 
+        if (isset($_GET['change_group']))
+        {
+            $n_id = (int)$_GET['n_id'];
+            $g_id = (int)$_GET['g_id'];
+
+            try
+            {
+                $nainManager->changeGroupNain($n_id, $g_id);
+            } catch (\PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
 
         $nainData = $nainManager->getNain((int)$id);
         $origin = $villeManager->getVilleById($nainData->getVille());
@@ -46,19 +60,7 @@ class NainController extends coreController
         $villeDepart = $villeManager->getVilleById($tunnel->getVilledepart());
         $villeArrivee = $villeManager->getVilleById($tunnel->getVillearrivee());
 
-        if (isset($_GET['change_group']))
-        {
-            $n_id = (int)$_GET['n_id'];
-            $g_id = (int)$_GET['g_id'];
 
-            try
-            {
-              $nainManager->changeGroupNain($n_id, $g_id);
-            } catch (\PDOException $e)
-              {
-                echo $e->getMessage();
-              }
-        }
 
         $this->showView($this->className, [
             'nain' => $nainData,

@@ -35,10 +35,6 @@ class Nain
                     $val = (int)$val;
                 }
 
-                if ($method == 'setGroupe' && is_null($val)) {
-                  $val = 'En vacances';
-                }
-
                 $this->$method($val);
             }
         }

@@ -33,15 +33,7 @@ class GroupController extends coreController
 
 
         $group = $g_manager->getGroupById($id);
-        $nainsInGroup = $g_manager->getNainsInGroup($id);
-        $taverne = $t_manager->getTaverneById((int)$group->getId());
-        $tunnel = $tunel_manager->getTunnelById((int)$group->getTunnel());
-        $listTavernes = $h_manager->getListeTavernes();
-        $startingHours = $g_manager->getStartingHours();
-        $finishingHours = $g_manager->getFinishingHours();
-        $tunnelList = $tunel_manager->getTunnelList();
-        $villeDepart = $v_manager->getVilleById($tunnel->getVilledepart());
-        $villeArrivee = $v_manager->getVilleById($tunnel->getVillearrivee());
+
 
         //var_dump($group->getId());
 
@@ -57,18 +49,34 @@ class GroupController extends coreController
 
             if ($countNainInGroup > $availableRooms)
             {
-              echo "Il n'y a pas assez de place dans la taverne.";
+                echo "Il n'y a pas assez de place dans la taverne.";
             } else
-              {
+            {
                 try
                 {
-                  $g_manager->updateGroupInfo($group->getId(), $startingHour, $finishingHour, $newTunnel, $newTaverne);
-                } catch (PDOException $e)
-                  {
+                    $g_manager->updateGroupInfo($group->getId(), $startingHour, $finishingHour, $newTunnel, $newTaverne);
+                } catch (\PDOException $e)
+                {
                     echo "error:" . $e->getMessage();
-                  }
-              }
+                }
+            }
         }
+
+
+        $group = $g_manager->getGroupById($id);
+
+
+        $nainsInGroup = $g_manager->getNainsInGroup($id);
+        $taverne = $t_manager->getTaverneById((int)$group->getId());
+        $tunnel = $tunel_manager->getTunnelById((int)$group->getTunnel());
+        $listTavernes = $h_manager->getListeTavernes();
+        $startingHours = $g_manager->getStartingHours();
+        $finishingHours = $g_manager->getFinishingHours();
+        $tunnelList = $tunel_manager->getTunnelList();
+        $villeDepart = $v_manager->getVilleById($tunnel->getVilledepart());
+        $villeArrivee = $v_manager->getVilleById($tunnel->getVillearrivee());
+
+
 
         $this->showView($this->className, [
             'group' => $group,
